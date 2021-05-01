@@ -1,0 +1,50 @@
+---
+title: "1.01.13"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+glimpse(diamonds)
+smaller <- filter(diamonds, carat <= 2.5)
+smaller
+```
+# Headings
+
+# top-level heading
+## second-level heading
+### third-level heading
+
+# Lists
+
+- list
+* list
++ list
+
+1. list
+2. list
+
+# Links
+
+[RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+
+# Images
+
+![Image of postcard of Melbourne.](https://ugc.futurelearn.com/uploads/assets/2a/22/2a22717f-0a39-49ad-8438-f5ceea0e3c18.jpg "Image of postcard of Melbourne.")
+
+# Attribution
+
+‘Collins Street, Looking East, Melbourne’ [Image] National Museum of Australia Retrieved from http://collectionsearch.nma.gov.au/object/720
+
+# Exercise
+
+```{r}
+data_url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/avengers/avengers.csv"
+avengers <- read_csv(data_url)
+```
+
+```{r}
+ggplot(avengers, aes(x = Gender, y = Appearances)) +
+  geom_boxplot()
+```
+
