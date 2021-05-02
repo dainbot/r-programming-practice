@@ -1,0 +1,79 @@
+---
+title: "1.02.02"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+tb <- read_rds("data/tb_tidy.rds")
+tb
+```
+```{r}
+tb_au <- filter(tb, country == "Australia")
+tb_au
+```
+# 100 percent chart
+```{r}
+library(tidyverse)
+tb <- read_rds("data/tb_tidy.rds")
+tb_au <- filter(tb,
+                country == "Australia",
+                !is.na(age_group))
+tb_au
+```
+```{r}
+p <- ggplot(tb_au, aes(x = year, y = count, fill = sex))
+p
+```
+```{r}
+p <- p + geom_bar(stat = "identity", position = "fill")
+p
+```
+```{r}
+p <- p + scale_fill_brewer(palette = "Dark2")
+p
+```
+```{r}
+p <- p + facet_grid( age_group ~ .)
+p
+```
+```{r}
+p <- ggplot(tb_au, aes(x = year, y = count, fill = sex)) +
+  geom_bar(stat = "identity", position = "fill") +
+  facet_grid(~ age_group) +
+  scale_fill_brewer(palette="Dark2")
+p
+```
+
+# Barchart
+```{r}
+library(tidyverse)
+tb <- read_rds("data/tb_tidy.rds")
+tb_au <- filter(tb,
+                country == "Australia",
+                !is.na(age_group))
+```
+
+```{r}
+p <- ggplot(tb_au, aes(x = year, y = count, fill = sex)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_grid(~ age_group) +
+  scale_fill_brewer(palette="Dark2")
+p
+```
+```{r}
+p <- ggplot(tb_au, aes(x = year, y = count, fill = sex)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_grid(~ age_group) +
+  scale_fill_brewer(palette="Dark2")
+p
+```
+
+```{r}
+p <- ggplot(tb_au, aes(x = year, y = count, fill = sex)) +
+  geom_bar(stat = "identity") +
+  facet_grid(sex ~ age_group) +
+  scale_fill_brewer(palette="Dark2")
+p
+```
+
