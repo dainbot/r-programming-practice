@@ -1,0 +1,63 @@
+---
+title: "1.02.07"
+output: html_document
+---
+
+```{r}
+tb_messy <- read_csv("data/TB_notifications.csv")
+tb_messy
+```
+```{r}
+tb_smaller <- tibble(year = c(2016, 2017, 2018),
+                     male = c(10, 20, 30),
+                     female = c(5, 15, 12))
+tb_smaller
+```
+```{r}
+tb_smaller_long <- tibble(
+  year = c(2016, 2017, 2018, 2016, 2017, 2018),
+  sex = c("male", "male", "male", "female", "female", "female"),
+  count = c(10,20,30, 5, 15, 12)
+)
+tb_smaller_long
+```
+```{r}
+tb_smaller_long <- gather(tb_smaller, 
+                          key = "sex", 
+                          value = "count",
+                          male, female)
+tb_smaller_long
+```
+```{r}
+tb_smaller_long <- gather(tb_smaller, "sex", "count", -year)
+tb_smaller_long
+```
+```{r}
+gather(tb_smaller)
+gather(tb_smaller, key = "sex", value = "value", male, year)
+```
+```{r}
+tb_long <- gather(tb_messy, key = "sex_agegroup", value = "count", -country, -year, -iso3)
+tb_long
+```
+```{r}
+tb_long <- gather(tb_messy, 
+                  key = "sex_agegroup", value = "count", 
+                  -country, -year, -iso3)
+tb_long
+```
+```{r}
+tb_long2 <- separate(tb_long, "sex_agegroup", 
+                     c("type", "sex_agegroup"),
+                     sep = "_(?=[mf])"
+)
+tb_long2
+```
+```{r}
+tb_long3 <- extract(tb_long2, 
+                    "sex_agegroup", 
+                    c("sex", "age_group"),
+                    regex = "([mf])(.*)")
+tb_long3
+```
+
