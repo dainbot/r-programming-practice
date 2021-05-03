@@ -3,6 +3,7 @@ title: "1.02.07"
 output: html_document
 ---
 
+# Exercise 01.02.07~09
 # Gather
 ```{r}
 tb_messy <- read_csv("data/TB_notifications.csv")
