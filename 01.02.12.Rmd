@@ -1,0 +1,54 @@
+---
+title: "1.02.11"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+tb_long <- read_rds("data/tb_long.rds")
+tb_long
+```
+```{r}
+tb_au <- filter(tb_long, country == "Australia")
+```
+
+```{r}
+filter(tb_long, country != "Australia")
+
+```
+```{r}
+filter(tb_long, count > 10)
+
+```
+```{r}
+filter(tb_long, iso3 %in% c("AUS", "NZL", "IDN"))
+
+```
+```{r}
+filter(tb_long, !(iso3 %in% c("AUS", "NZL", "IDN")))
+
+```
+```{r}
+filter(tb_long, is.na(count))
+
+```
+```{r}
+filter(tb_long, !is.na(count), country == "India")
+
+```
+```{r}
+filter(tb_long, !is.na(count) | country == "India")
+
+```
+
+```{r}
+# Take tb_long and filter for all countries except Australia
+tb_long %>% filter(country != "Australia")
+
+# Take tb_long and filter for count greater than or equal to 10
+tb_long %>% filter(count >= 10)
+
+# Take tb_long and filter for iso3 
+filter(tb_long, iso3 %in% c("AUS", "NZL", "IDN"))
+```
+
